@@ -43,7 +43,9 @@ public class Scoreboard : MonoBehaviourPunCallbacks
 		scoreboardItems.Remove(player);
 	}
 
-	void Update()
+	/*
+	 void Update()
+	 
 	{
 		if(Input.GetKeyDown(KeyCode.Tab))
 		{
@@ -54,4 +56,5 @@ public class Scoreboard : MonoBehaviourPunCallbacks
 			canvasGroup.alpha = 0;
 		}
 	}
+	*/
 }
