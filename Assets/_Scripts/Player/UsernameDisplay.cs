@@ -7,7 +7,7 @@ public class UsernameDisplay : MonoBehaviour
     [SerializeField] PhotonView playerPV;
     [SerializeField] TMP_Text text;
 
-    void Start()
+    private void Start()
     {
         if (playerPV.IsMine)
         {

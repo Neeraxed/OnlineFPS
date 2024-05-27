@@ -2,34 +2,27 @@
 
 public class PlayerGroundCheck : MonoBehaviour
 {
-    PlayerController playerController;
+    private PlayerController playerController;
+    [SerializeField] private string GroundTag;
 
-    void Awake()
+    private void Awake()
     {
         playerController = GetComponentInParent<PlayerController>();
     }
 
-    void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject == playerController.gameObject)
             return;
-
-        playerController.SetGroundedState(true);
+        else if (other.gameObject.CompareTag("Ground"))
+            playerController.SetGroundedState(true);
     }
 
-    void OnTriggerExit(Collider other)
+    private void OnTriggerExit(Collider other)
     {
         if (other.gameObject == playerController.gameObject)
             return;
-
-        playerController.SetGroundedState(false);
-    }
-
-    void OnTriggerStay(Collider other)
-    {
-        if (other.gameObject == playerController.gameObject)
-            return;
-
-        playerController.SetGroundedState(true);
+        else if (other.gameObject.CompareTag("Ground"))
+            playerController.SetGroundedState(false);
     }
 }

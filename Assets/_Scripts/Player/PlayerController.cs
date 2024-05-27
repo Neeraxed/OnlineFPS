@@ -6,14 +6,11 @@ using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
 {
-    [SerializeField] Image healthbarImage;
-    [SerializeField] GameObject ui;
-
-    [SerializeField] GameObject cameraHolder;
-
-    [SerializeField] float mouseSensitivity, sprintSpeed, walkSpeed, jumpForce, smoothTime;
-
-    [SerializeField] Item[] items;
+    [SerializeField] private Image healthbarImage;
+    [SerializeField] private GameObject ui;
+    [SerializeField] private GameObject cameraHolder;
+    [SerializeField] private float mouseSensitivity, sprintSpeed, walkSpeed, jumpForce, smoothTime;
+    [SerializeField] private Item[] items;
 
     private int itemIndex;
     private int previousItemIndex = -1;
@@ -23,13 +20,29 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
     private Vector3 moveAmount;
     private Rigidbody rb;
     private PhotonView PV;
+    private const float maxHealth = 100f;
+    private float currentHealth = maxHealth;
+    private PlayerManager playerManager;
 
-    const float maxHealth = 100f;
-    float currentHealth = maxHealth;
+    public override void OnPlayerPropertiesUpdate(Player targetPlayer, Hashtable changedProps)
+    {
+        if (changedProps.ContainsKey("itemIndex") && !PV.IsMine && targetPlayer == PV.Owner)
+        {
+            EquipItem((int)changedProps["itemIndex"]);
+        }
+    }
 
-    PlayerManager playerManager;
+    public void SetGroundedState(bool _grounded)
+    {
+        grounded = _grounded;
+    }
 
-    void Awake()
+    public void TakeDamage(float damage)
+    {
+        PV.RPC(nameof(RPC_TakeDamage), PV.Owner, damage);
+    }
+
+    private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         PV = GetComponent<PhotonView>();
@@ -37,7 +50,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
         playerManager = PhotonView.Find((int)PV.InstantiationData[0]).GetComponent<PlayerManager>();
     }
 
-    void Start()
+    private void Start()
     {
         if (PV.IsMine)
         {
@@ -51,7 +64,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
         }
     }
 
-    void Update()
+    private void Update()
     {
         if (!PV.IsMine)
             return;
@@ -104,7 +117,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
         }
     }
 
-    void Look()
+    private void Look()
     {
         transform.Rotate(Vector3.up * Input.GetAxisRaw("Mouse X") * mouseSensitivity);
 
@@ -114,14 +127,14 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
         cameraHolder.transform.localEulerAngles = Vector3.left * verticalLookRotation;
     }
 
-    void Move()
+    private void Move()
     {
         Vector3 moveDir = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
 
         moveAmount = Vector3.SmoothDamp(moveAmount, moveDir * (Input.GetKey(KeyCode.LeftShift) ? sprintSpeed : walkSpeed), ref smoothMoveVelocity, smoothTime);
     }
 
-    void Jump()
+    private void Jump()
     {
         if (Input.GetKeyDown(KeyCode.Space) && grounded)
         {
@@ -129,7 +142,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
         }
     }
 
-    void EquipItem(int _index)
+    private void EquipItem(int _index)
     {
         if (_index == previousItemIndex)
             return;
@@ -153,20 +166,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
         }
     }
 
-    public override void OnPlayerPropertiesUpdate(Player targetPlayer, Hashtable changedProps)
-    {
-        if (changedProps.ContainsKey("itemIndex") && !PV.IsMine && targetPlayer == PV.Owner)
-        {
-            EquipItem((int)changedProps["itemIndex"]);
-        }
-    }
-
-    public void SetGroundedState(bool _grounded)
-    {
-        grounded = _grounded;
-    }
-
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         if (!PV.IsMine)
             return;
@@ -174,13 +174,8 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
         rb.MovePosition(rb.position + transform.TransformDirection(moveAmount) * Time.fixedDeltaTime);
     }
 
-    public void TakeDamage(float damage)
-    {
-        PV.RPC(nameof(RPC_TakeDamage), PV.Owner, damage);
-    }
-
     [PunRPC]
-    void RPC_TakeDamage(float damage, PhotonMessageInfo info)
+    private void RPC_TakeDamage(float damage, PhotonMessageInfo info)
     {
         currentHealth -= damage;
 
@@ -193,7 +188,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
         }
     }
 
-    void Die()
+    private void Die()
     {
         playerManager.Die();
     }

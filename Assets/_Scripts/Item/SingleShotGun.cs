@@ -5,19 +5,19 @@ public class SingleShotGun : Gun
 {
     [SerializeField] Camera cam;
 
-    PhotonView PV;
-
-    void Awake()
-    {
-        PV = GetComponent<PhotonView>();
-    }
+    private PhotonView PV;
 
     public override void Use()
     {
         Shoot();
     }
 
-    void Shoot()
+    private void Awake()
+    {
+        PV = GetComponent<PhotonView>();
+    }
+
+    private void Shoot()
     {
         Ray ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f));
         ray.origin = cam.transform.position;
@@ -29,7 +29,7 @@ public class SingleShotGun : Gun
     }
 
     [PunRPC]
-    void RPC_Shoot(Vector3 hitPosition, Vector3 hitNormal)
+    private void RPC_Shoot(Vector3 hitPosition, Vector3 hitNormal)
     {
         Collider[] colliders = Physics.OverlapSphere(hitPosition, 0.3f);
         if (colliders.Length != 0)

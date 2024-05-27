@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 670ad16e6abf4aa4b9b9c6bb5ea81170, type: 3}
+  m_Name: SceneObjects.LevelDesign.LevelData
+  m_EditorClassIdentifier: 
+  levelData:
+    prefabGUID: b7f9206f78ebaed4ebb3aae61518e7ff
+    mainSet: {fileID: 11400000, guid: 5c68f49ae842d3c44841737380909fb8, type: 2}
+    objectsSet: {fileID: 11400000, guid: 338340c5f485df24cb45c8831b969b62, type: 2}
+    optionsSettings:
+      moveSnap: 1
+      rotationSnap: 22.5
+      wallsManipulatorsHeight: 1
+      hoverResponsiveHandles: 1
+    visibilitySettings:
+      movement: 1
+      rotation: 1
+      walls: 1
+      wallsMovement: 1
+      wallsRotation: 0
+      wings: 1
+      wingsGrowth: 1
+      wingsLines: 1
+      objects: 1
+      floors: 1
+      hidden: 0
+    wallsData: []
+    simpleObjectsData: []
+    floorsData:
+    - simpleObjectData:
+        fileID: 4972721390412423193
+      prefabGUID: 2a4ce19af6db7aa4db129244dda70e5c
+      size: 4
+      tilesFileIDsWidth: 1
+      startingRow: 0
+      startingCol: 0
+      tilesFileIDs: 13300c585701f154
+    - simpleObjectData:
+        fileID: 1419559643135183172
+      prefabGUID: 2a4ce19af6db7aa4db129244dda70e5c
+      size: 4
+      tilesFileIDsWidth: 14
+      startingRow: -12
+      startingCol: 8
+      tilesFileIDs: 5ba5da34611ed143d41d8a93adcdf06290a401b57f908a501640ac9e952191594c29cfae7999c812c772210e2483eb7658efd503868a1d50615fcc200815e421dc22493ce903d014e65282f3a5976d35b940801e9963306f7e4a8eaade87e04f9dd424d6b073274ea87cc1b2f6cc61757303e42670ef4863c86275fe48cac979d547e8d0b48a8b527018813ea7e72d6f66cd66ae9340b8388cd1f1147fbc1f266c53d1faf41cde667635e237a05f9f29ccd2845d6f1d2429de2029a42e4fdc06ea22755afc3586251542855f1818dd36fa1a47c95dccd815215aaf467debef095cf4225bf85c6e21458b26020d15322e6a09c391c8359559402f5e958f578e27bfb7e7e0fbd87c6db4b2b3ddae1d693da104f70754b9ea5e12ce133e3146ef7aff312686305bd13d2f15c8aa699a910e7db99a2630781e15a43c22c2b886332cc9f88b403ce16134382e3c88d3833b35ef1ecadb85a8f22cc79a9b34c5ee156312e9d18afc01fd0589a3a8a2e6f6974e2444d8c66c0fde4724eaa95c7211603fedb235e31f80526362f479c3d56f0854aea14376c76d353cbe358761d9b5cb69d2bf9d11b19c227eff474df1e80ea52d952f70ee0cc58b1b85a2cfceec2317768adc8cebde218913be94c179f0f6b26694240a222466752b9e509caafef8175b9cf1765502ecb122ba9461f56988ab391e4ef636450c745090f335a6c4cb925b25fea2de9a7e3a5e3113f0967369ca1b26eeda5e76cada137f7c1f0cd23efa1ed3a502c6cbf0ca5dda2bd4c2392e6a2f4afb024c5d25ba414d3139f81bfba80b5414c93f77d8d06087ad84ce38eb9c7bd6149ed3ed6c1820348db7a81b4b2e47b46f43646648c243f57639c9192d6959d27d5b6b613d80106fd2b575e83fa37353df39582029a66c3f7401656e5c663aac29746017108d0bea3108b282d3fa05fc2495a23b155a3074b9a5c84132f122c0e4fcaf3b35df20c7c6ccede903dd0c6861827005eb8a3c0ff92693774dcd1c8f4486170051f670217fef4950be3f69ecdf2722e0f23a03374629886b83973e816d67cc8da33954d1d5c0801088804601c4beb56c6adb62b0abf7a3d97184442c5ff3e22280951190a56aaac7201828ec8ac2e3c21f2a1fc0fb7f79e63b5c02904ff5cd8f840d3e4298c1a46e757c265908a71d04f2d37e2240edfc2b72dc5021e17cb4c465261555250b1d023beb0fb1e97064d8c0cc33e44e037abb56fc3a4e14db9ba4dcb95e74fbc50f22b12b7827dbb140d120f527f214c774a9bf4910e8cc6f38beea5372056959a51623ef6d10f58f02a7ca5b4025da6074693a851ebf6e591b51839962e70608d262e2512429282a20513f4c7475951d1511372a030684d77d9d3d5708d0312bdabf0dfe27bbdac4edfe2e832a0adc6f7a41e24160
+    - simpleObjectData:
+        fileID: 3414121140035342059
+      prefabGUID: 4cf599942c7e83e4bbc35b67a488e70a
+      size: 2
+      tilesFileIDsWidth: 1
+      startingRow: 0
+      startingCol: 0
+      tilesFileIDs: 030a7e0bdb460125

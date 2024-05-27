@@ -11,14 +11,6 @@ public class Scoreboard : MonoBehaviourPunCallbacks
 
     Dictionary<Player, ScoreboardItem> scoreboardItems = new Dictionary<Player, ScoreboardItem>();
 
-    void Start()
-    {
-        foreach (Player player in PhotonNetwork.PlayerList)
-        {
-            AddScoreboardItem(player);
-        }
-    }
-
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
         AddScoreboardItem(newPlayer);
@@ -29,20 +21,15 @@ public class Scoreboard : MonoBehaviourPunCallbacks
         RemoveScoreboardItem(otherPlayer);
     }
 
-    void AddScoreboardItem(Player player)
+    private void Start()
     {
-        ScoreboardItem item = Instantiate(scoreboardItemPrefab, container).GetComponent<ScoreboardItem>();
-        item.Initialize(player);
-        scoreboardItems[player] = item;
+        foreach (Player player in PhotonNetwork.PlayerList)
+        {
+            AddScoreboardItem(player);
+        }
     }
 
-    void RemoveScoreboardItem(Player player)
-    {
-        Destroy(scoreboardItems[player].gameObject);
-        scoreboardItems.Remove(player);
-    }
-
-    void Update()
+    private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Tab))
         {
@@ -52,5 +39,18 @@ public class Scoreboard : MonoBehaviourPunCallbacks
         {
             canvasGroup.alpha = 0;
         }
+    }
+
+    private void AddScoreboardItem(Player player)
+    {
+        ScoreboardItem item = Instantiate(scoreboardItemPrefab, container).GetComponent<ScoreboardItem>();
+        item.Initialize(player);
+        scoreboardItems[player] = item;
+    }
+
+    private void RemoveScoreboardItem(Player player)
+    {
+        Destroy(scoreboardItems[player].gameObject);
+        scoreboardItems.Remove(player);
     }
 }
