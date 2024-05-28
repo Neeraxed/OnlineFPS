@@ -2,17 +2,17 @@
 
 public class Billboard : MonoBehaviour
 {
-    private Camera cam;
+    private Camera _camera;
 
     private void Update()
     {
-        if (cam == null)
-            cam = FindObjectOfType<Camera>();
+        if (_camera == null)
+            _camera = FindObjectOfType<Camera>();
 
-        if (cam == null)
+        if (_camera == null)
             return;
 
-        transform.LookAt(cam.transform);
+        transform.LookAt(_camera.transform);
         transform.Rotate(Vector3.up * 180);
     }
 }

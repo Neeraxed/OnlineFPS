@@ -6,23 +6,23 @@ using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 public class ScoreboardItem : MonoBehaviourPunCallbacks
 {
-    [SerializeField] private TMP_Text usernameText;
-    [SerializeField] private TMP_Text killsText;
-    [SerializeField] private TMP_Text deathsText;
+    [SerializeField] private TMP_Text _usernameText;
+    [SerializeField] private TMP_Text _killsText;
+    [SerializeField] private TMP_Text _deathsText;
 
-    Player player;
+    private Player _player;
 
     public void Initialize(Player player)
     {
-        this.player = player;
+        _player = player;
 
-        usernameText.text = player.NickName;
+        _usernameText.text = player.NickName;
         UpdateStats();
     }
 
     public override void OnPlayerPropertiesUpdate(Player targetPlayer, Hashtable changedProps)
     {
-        if (targetPlayer == player)
+        if (targetPlayer == _player)
         {
             if (changedProps.ContainsKey("kills") || changedProps.ContainsKey("deaths"))
             {
@@ -33,13 +33,13 @@ public class ScoreboardItem : MonoBehaviourPunCallbacks
 
     private void UpdateStats()
     {
-        if (player.CustomProperties.TryGetValue("kills", out object kills))
+        if (_player.CustomProperties.TryGetValue("kills", out object kills))
         {
-            killsText.text = kills.ToString();
+            _killsText.text = kills.ToString();
         }
-        if (player.CustomProperties.TryGetValue("deaths", out object deaths))
+        if (_player.CustomProperties.TryGetValue("deaths", out object deaths))
         {
-            deathsText.text = deaths.ToString();
+            _deathsText.text = deaths.ToString();
         }
     }
 }

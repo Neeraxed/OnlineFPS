@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class RoomListItem : MonoBehaviour
 {
-    [SerializeField] TMP_Text text;
+    [SerializeField] TMP_Text _text;
 
-    public RoomInfo info;
+    public RoomInfo _info;
 
-    public void SetUp(RoomInfo _info)
+    public void SetUp(RoomInfo info)
     {
-        info = _info;
-        text.text = _info.Name;
+        _info = info;
+        _text.text = _info.Name;
     }
 
     public void OnClick()
     {
-        Launcher.Instance.JoinRoom(info);
+        Launcher.Instance.JoinRoom(_info);
     }
 }

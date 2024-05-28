@@ -7,41 +7,41 @@ using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 public class PlayerManager : MonoBehaviour
 {
-    private PhotonView PV;
-    private GameObject controller;
-    private int kills;
-    private int deaths;
+    private PhotonView _PV;
+    private GameObject _controller;
+    private int _kills;
+    private int _deaths;
 
     public static PlayerManager Find(Player player)
     {
-        return FindObjectsOfType<PlayerManager>().SingleOrDefault(x => x.PV.Owner == player);
+        return FindObjectsOfType<PlayerManager>().SingleOrDefault(x => x._PV.Owner == player);
     }
 
     public void Die()
     {
-        PhotonNetwork.Destroy(controller);
+        PhotonNetwork.Destroy(_controller);
         CreateController();
 
-        deaths++;
+        _deaths++;
 
         Hashtable hash = new Hashtable();
-        hash.Add("deaths", deaths);
+        hash.Add("Deaths", _deaths);
         PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
     }
 
     public void GetKill()
     {
-        PV.RPC(nameof(RPC_GetKill), PV.Owner);
+        _PV.RPC(nameof(RPC_GetKill), _PV.Owner);
     }
 
     private void Awake()
     {
-        PV = GetComponent<PhotonView>();
+        _PV = GetComponent<PhotonView>();
     }
 
     private void Start()
     {
-        if (PV.IsMine)
+        if (_PV.IsMine)
         {
             CreateController();
         }
@@ -50,16 +50,16 @@ public class PlayerManager : MonoBehaviour
     private void CreateController()
     {
         Transform spawnpoint = SpawnManager.Instance.GetSpawnpoint();
-        controller = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerController"), spawnpoint.position, spawnpoint.rotation, 0, new object[] { PV.ViewID });
+        _controller = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerController"), spawnpoint.position, spawnpoint.rotation, 0, new object[] { _PV.ViewID });
     }
 
     [PunRPC]
     private void RPC_GetKill()
     {
-        kills++;
+        _kills++;
 
         Hashtable hash = new Hashtable();
-        hash.Add("kills", kills);
+        hash.Add("Kills", _kills);
         PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
     }
 }

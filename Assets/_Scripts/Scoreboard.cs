@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class Scoreboard : MonoBehaviourPunCallbacks
 {
-    [SerializeField] Transform container;
-    [SerializeField] GameObject scoreboardItemPrefab;
-    [SerializeField] CanvasGroup canvasGroup;
+    [SerializeField] Transform _container;
+    [SerializeField] GameObject _scoreboardItemPrefab;
+    [SerializeField] CanvasGroup _canvasGroup;
 
     Dictionary<Player, ScoreboardItem> scoreboardItems = new Dictionary<Player, ScoreboardItem>();
 
@@ -33,17 +33,17 @@ public class Scoreboard : MonoBehaviourPunCallbacks
     {
         if (Input.GetKeyDown(KeyCode.Tab))
         {
-            canvasGroup.alpha = 1;
+            _canvasGroup.alpha = 1;
         }
         else if (Input.GetKeyUp(KeyCode.Tab))
         {
-            canvasGroup.alpha = 0;
+            _canvasGroup.alpha = 0;
         }
     }
 
     private void AddScoreboardItem(Player player)
     {
-        ScoreboardItem item = Instantiate(scoreboardItemPrefab, container).GetComponent<ScoreboardItem>();
+        ScoreboardItem item = Instantiate(_scoreboardItemPrefab, _container).GetComponent<ScoreboardItem>();
         item.Initialize(player);
         scoreboardItems[player] = item;
     }
