@@ -117,10 +117,6 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
 
         moveAmount = Vector3.SmoothDamp(moveAmount, moveDir * (Input.GetKey(KeyCode.LeftShift) ? sprintSpeed : walkSpeed), ref smoothMoveVelocity, smoothTime);
 
-        animator.SetFloat("Horiontal", inputX);
-        Debug.Log($"Horiontal = {inputX}, anim Horiontal = {animator.GetFloat("Horizontal")}");
-        animator.SetFloat("Vertical", inputY);
-        Debug.Log($"Vertical = {inputY}, anim Vertical = {animator.GetFloat("Vertical")}");
     }
 
     private void Jump()
@@ -166,7 +162,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
     public void SetGroundedState(bool _grounded)
     {
         grounded = _grounded;
-        animator.SetBool("IsGround", _grounded);
+        //animator.SetBool("IsGround", _grounded);
     }
 
     private void FixedUpdate()
