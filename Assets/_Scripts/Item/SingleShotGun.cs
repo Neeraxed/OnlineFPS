@@ -5,14 +5,9 @@ public class SingleShotGun : Gun
 {
     [SerializeField] private Camera cam;
 
-    //private PhotonView PV;
+    [SerializeField] private BulletCreator bulletCreator;
 
-    [Space]
-    [SerializeField] private GameObject bulletPref;
-    [SerializeField] private Transform shootPoint;
-    [SerializeField] private float shootSpeed;
-    [SerializeField] private float gravityForce;
-    [SerializeField] private float bulletLifeTime;
+    //private PhotonView PV;
 
     public override void Use()
     {
@@ -35,11 +30,8 @@ public class SingleShotGun : Gun
         //}
 
 
-        GameObject bullet = Instantiate(bulletPref, shootPoint.position, shootPoint.rotation);
-        ParabolicBullet bulletScript = bullet.GetComponent<ParabolicBullet>();
-        if(bulletScript)
-            bulletScript.Initialize(shootPoint, shootSpeed, gravityForce);
-        Destroy(bullet, bulletLifeTime);
+        var parabolicbullet = bulletCreator.CreateParabolicBullet();
+        bulletCreator.CreateVisualBullet(parabolicbullet);
     }
 
     //[PunRPC]

@@ -2,11 +2,10 @@ using UnityEngine;
 
 public class ParabolicBullet : MonoBehaviour
 {
-    [SerializeField] float speed;
-    [SerializeField] float gravity;
-    [SerializeField] Vector3 startPosition;
-    [SerializeField] Vector3 startForward;
-
+    private float speed;
+    private float gravity;
+    private Vector3 startPosition;
+    private Vector3 startForward;
     private bool isInitialized = false;
     private float startTime = -1;
     private float currentTime;
@@ -48,6 +47,10 @@ public class ParabolicBullet : MonoBehaviour
 
         if (CastRayBetweenPoints(currentPoint, nextPoint, out hit))
         {
+            if(hit.transform.TryGetComponent(out IShootable shootable))
+            {
+                shootable.OnHit(hit);
+            }
             Destroy(gameObject);
         }
     }
