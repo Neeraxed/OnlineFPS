@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748172, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -148,12 +148,18 @@ Transform:
   m_GameObject: {fileID: 68484448}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.145, y: -0.144, z: 0.505}
+  m_LocalPosition: {x: 0.145, y: -0.1404, z: 0.5225}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 799891332}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &698125253 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8913202309253582004, guid: 344b29e78c596ad47b6e205062ce74a6,
+    type: 3}
+  m_PrefabInstance: {fileID: 799891331}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &799891331
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -297,14 +303,14 @@ PrefabInstance:
     - {fileID: 4325012780795527394, guid: 344b29e78c596ad47b6e205062ce74a6, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 8913202309253582004, guid: 344b29e78c596ad47b6e205062ce74a6,
+        type: 3}
+      insertIndex: 1
+      addedObject: {fileID: 1429982504}
     - targetCorrespondingSourceObject: {fileID: 6859647364140423, guid: 344b29e78c596ad47b6e205062ce74a6,
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 68484449}
-    - targetCorrespondingSourceObject: {fileID: 6859647364140423, guid: 344b29e78c596ad47b6e205062ce74a6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1429982504}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 344b29e78c596ad47b6e205062ce74a6, type: 3}
 --- !u!4 &799891332 stripped
@@ -672,11 +678,11 @@ Transform:
   m_GameObject: {fileID: 1429982503}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 4.6257163e-27, w: 1}
-  m_LocalPosition: {x: -4.3368087e-19, y: -0.013999999, z: -0.106000006}
+  m_LocalPosition: {x: 0, y: 0.30900002, z: -0.287}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 799891332}
+  m_Father: {fileID: 698125253}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1443942775 stripped
 MonoBehaviour:
@@ -994,6 +1000,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: BulletCreator
       objectReference: {fileID: 0}
+    - target: {fileID: 2353743549666672218, guid: 74ae7c919af3a2d4e98fbc14c07ca9d0,
+        type: 3}
+      propertyPath: visualBulletStart
+      value: 
+      objectReference: {fileID: 68484449}
+    - target: {fileID: 2353743549666672218, guid: 74ae7c919af3a2d4e98fbc14c07ca9d0,
+        type: 3}
+      propertyPath: parabolicBulletStart
+      value: 
+      objectReference: {fileID: 1429982504}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

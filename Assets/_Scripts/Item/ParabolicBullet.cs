@@ -9,29 +9,18 @@ public class ParabolicBullet : MonoBehaviour
     private bool isInitialized = false;
     private float startTime = -1;
     private float currentTime;
+    private float damage;
 
-    public void Initialize(Transform startPoint, float speed, float gravity)
+    public void Initialize(Transform startPoint, float speed, float gravity, float damage)
     {
         startPosition = startPoint.position;
         startForward = startPoint.forward;
         this.speed = speed;
         this.gravity = gravity;
+        this.damage = damage;
         isInitialized = true;
         transform.position = startPosition;
     }
-
-    private Vector3 FindPointOnParabola(float time)
-    {
-        Vector3 point = startPosition + (startForward * speed * time);
-        Vector3 gravityVector = Vector3.down * gravity * time * time;
-        return point + gravityVector;
-    }
-
-    private bool CastRayBetweenPoints(Vector3 startPoint, Vector3 endPoint, out RaycastHit hit)
-    {
-        return Physics.Raycast(startPoint, endPoint - startPoint, out hit, (endPoint - startPoint).magnitude);
-    }
-
     private void FixedUpdate()
     {
         if (!isInitialized) return;
@@ -47,9 +36,9 @@ public class ParabolicBullet : MonoBehaviour
 
         if (CastRayBetweenPoints(currentPoint, nextPoint, out hit))
         {
-            if(hit.transform.TryGetComponent(out IShootable shootable))
+            if (hit.transform.TryGetComponent(out IDamageable damageable))
             {
-                shootable.OnHit(hit);
+                damageable.TakeDamage(damage);
             }
             Destroy(gameObject);
         }
@@ -61,5 +50,17 @@ public class ParabolicBullet : MonoBehaviour
 
         Vector3 currentPoint = FindPointOnParabola(currentTime);
         transform.position = currentPoint;
+    }
+
+    private Vector3 FindPointOnParabola(float time)
+    {
+        Vector3 point = startPosition + (startForward * speed * time);
+        Vector3 gravityVector = Vector3.down * gravity * time * time;
+        return point + gravityVector;
+    }
+
+    private bool CastRayBetweenPoints(Vector3 startPoint, Vector3 endPoint, out RaycastHit hit)
+    {
+        return Physics.Raycast(startPoint, endPoint - startPoint, out hit, (endPoint - startPoint).magnitude);
     }
 }

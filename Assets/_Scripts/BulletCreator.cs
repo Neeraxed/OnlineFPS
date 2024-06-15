@@ -12,12 +12,12 @@ public class BulletCreator : MonoBehaviour
     [SerializeField] private float gravityForce;
     [SerializeField] private float bulletLifeTime;
 
-    public GameObject CreateParabolicBullet()
+    public GameObject CreateParabolicBullet(float damage)
     {
         GameObject bullet = Instantiate(parabolicBulletPref, parabolicBulletStart.position, parabolicBulletStart.rotation);
         ParabolicBullet bulletScript = bullet.GetComponent<ParabolicBullet>();
         if (bulletScript)
-            bulletScript.Initialize(parabolicBulletStart, shootSpeed, gravityForce);
+            bulletScript.Initialize(parabolicBulletStart, shootSpeed, gravityForce, damage);
         Destroy(bullet, bulletLifeTime);
 
         return bullet;

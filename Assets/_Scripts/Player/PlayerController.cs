@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
     [SerializeField] private GameObject cameraHolder;
     [SerializeField] private float mouseSensitivity, sprintSpeed, walkSpeed, jumpForce, smoothTime;
     [SerializeField] private Item[] items;
+    [SerializeField] private Animator animator;
 
     private int itemIndex;
     private int previousItemIndex = -1;
@@ -23,7 +24,6 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
     private const float maxHealth = 100f;
     private float currentHealth = maxHealth;
     private PlayerManager playerManager;
-    [SerializeField] private Animator animator;
 
     private void Awake()
     {
