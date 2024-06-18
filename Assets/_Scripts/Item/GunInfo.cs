@@ -3,5 +3,5 @@
 [CreateAssetMenu(menuName = "FPS/New Gun")]
 public class GunInfo : ItemInfo
 {
-    public float Damage;
+    public float damage;
 }

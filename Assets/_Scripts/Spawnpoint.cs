@@ -2,10 +2,9 @@
 
 public class Spawnpoint : MonoBehaviour
 {
-    [SerializeField] private GameObject _graphics;
-
+    [SerializeField] GameObject graphics;
     private void Awake()
     {
-        _graphics.SetActive(false);
+        graphics.SetActive(false);
     }
 }

@@ -2,47 +2,46 @@ using UnityEngine;
 
 public class WayPoint : MonoBehaviour
 {
-    [SerializeField] private GameObject[] _waypoints;
-    [SerializeField] private float _minDist;
-    [SerializeField] private float _speed;
-    [SerializeField] private bool _rand = false;
-    [SerializeField] private bool _go = true;
+    public GameObject[] waypoints;
+    public float minDist;
+    public float speed;
+    public bool rand = false;
+    public bool go = true;
 
-    private int _num = 0;
+    private int num = 0;
+
+    public void Move()
+    {
+        gameObject.transform.LookAt(waypoints[num].transform.position);
+        gameObject.transform.position += gameObject.transform.forward * speed * Time.deltaTime;
+    }
 
     private void Update()
     {
-        float dist = Vector3.Distance(gameObject.transform.position, _waypoints[_num].transform.position);
-        if (_go)
+        float dist = Vector3.Distance(gameObject.transform.position, waypoints[num].transform.position);
+        if(go)
         {
-            if (dist > _minDist)
+            if(dist>minDist)
             {
                 Move();
             }
             else
             {
-                if (!_rand)
-                {
-                    if (_num + 1 == _waypoints.Length)
+                if(!rand){
+                    if(num + 1 == waypoints.Length)
                     {
-                        _num = 0;
+                        num = 0;
                     }
                     else
                     {
-                        _num++;
-                    }
+                        num++;                        
+                    }                    
                 }
-                else
-                {
-                    _num = Random.Range(0, _waypoints.Length);
+            else{
+                num = Random.Range(0, waypoints.Length);
                 }
             }
         }
-    }
-
-    public void Move()
-    {
-        gameObject.transform.LookAt(_waypoints[_num].transform.position);
-        gameObject.transform.position += gameObject.transform.forward * _speed * Time.deltaTime;
+        
     }
 }

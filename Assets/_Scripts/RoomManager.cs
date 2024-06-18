@@ -32,7 +32,6 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
     {
-        //TODO make a reference a bit more beautiful
         if (scene.buildIndex == 1) // We're in the game scene
         {
             PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerManager"), Vector3.zero, Quaternion.identity);

@@ -2,5 +2,5 @@
 
 public class ItemInfo : ScriptableObject
 {
-    public string ItemName;
+    public string itemName;
 }

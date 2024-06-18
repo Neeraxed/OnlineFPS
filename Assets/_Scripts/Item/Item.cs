@@ -2,8 +2,8 @@
 
 public abstract class Item : MonoBehaviour
 {
-    public ItemInfo ItemInfo;
-    public GameObject ItemGameObject;
+    public ItemInfo itemInfo;
+    public GameObject itemGameObject;
 
     public abstract void Use();
 }

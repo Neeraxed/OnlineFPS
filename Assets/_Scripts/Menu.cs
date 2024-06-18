@@ -2,12 +2,12 @@
 
 public class Menu : MonoBehaviour
 {
-    public string MenuName;
-    public bool IsOpen;
+    public string menuName;
+    public bool open;
 
     public void ChangeStatus(bool status)
     {
-        IsOpen = status;
-        gameObject.SetActive(true);
+        open = status;
+        gameObject.SetActive(status);
     }
 }

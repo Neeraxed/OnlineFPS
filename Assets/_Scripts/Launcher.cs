@@ -9,25 +9,14 @@ public class Launcher : MonoBehaviourPunCallbacks
 {
     public static Launcher Instance;
 
-    [SerializeField] TMP_InputField _roomNameInputField;
-    [SerializeField] TMP_Text _errorText;
-    [SerializeField] TMP_Text _roomNameText;
-    [SerializeField] Transform _roomListContent;
-    [SerializeField] GameObject _roomListItemPrefab;
-    [SerializeField] Transform _playerListContent;
-    [SerializeField] GameObject _playerListItemPrefab;
-    [SerializeField] GameObject _startGameButton;
-
-    void Awake()
-    {
-        Instance = this;
-    }
-
-    void Start()
-    {
-        Debug.Log("Connecting to Master");
-        PhotonNetwork.ConnectUsingSettings();
-    }
+    [SerializeField] TMP_InputField roomNameInputField;
+    [SerializeField] TMP_Text errorText;
+    [SerializeField] TMP_Text roomNameText;
+    [SerializeField] Transform roomListContent;
+    [SerializeField] GameObject roomListItemPrefab;
+    [SerializeField] Transform playerListContent;
+    [SerializeField] GameObject PlayerListItemPrefab;
+    [SerializeField] GameObject startGameButton;
 
     public override void OnConnectedToMaster()
     {
@@ -44,42 +33,42 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     public void CreateRoom()
     {
-        if (string.IsNullOrEmpty(_roomNameInputField.text))
+        if (string.IsNullOrEmpty(roomNameInputField.text))
         {
             return;
         }
-        PhotonNetwork.CreateRoom(_roomNameInputField.text);
+        PhotonNetwork.CreateRoom(roomNameInputField.text);
         MenuManager.Instance.OpenMenu("loading");
     }
 
     public override void OnJoinedRoom()
     {
         MenuManager.Instance.OpenMenu("room");
-        _roomNameText.text = PhotonNetwork.CurrentRoom.Name;
+        roomNameText.text = PhotonNetwork.CurrentRoom.Name;
 
         Player[] players = PhotonNetwork.PlayerList;
 
-        foreach (Transform child in _playerListContent)
+        foreach (Transform child in playerListContent)
         {
             Destroy(child.gameObject);
         }
 
         for (int i = 0; i < players.Count(); i++)
         {
-            Instantiate(_playerListItemPrefab, _playerListContent).GetComponent<PlayerListItem>().SetUp(players[i]);
+            Instantiate(PlayerListItemPrefab, playerListContent).GetComponent<PlayerListItem>().SetUp(players[i]);
         }
 
-        _startGameButton.SetActive(PhotonNetwork.IsMasterClient);
+        startGameButton.SetActive(PhotonNetwork.IsMasterClient);
     }
 
     public override void OnMasterClientSwitched(Player newMasterClient)
     {
-        _startGameButton.SetActive(PhotonNetwork.IsMasterClient);
+        startGameButton.SetActive(PhotonNetwork.IsMasterClient);
     }
 
     public override void OnCreateRoomFailed(short returnCode, string message)
     {
-        _errorText.text = "Room Creation Failed: " + message;
+        errorText.text = "Room Creation Failed: " + message;
         Debug.LogError("Room Creation Failed: " + message);
         MenuManager.Instance.OpenMenu("error");
     }
@@ -108,7 +97,7 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
-        foreach (Transform trans in _roomListContent)
+        foreach (Transform trans in roomListContent)
         {
             Destroy(trans.gameObject);
         }
@@ -117,12 +106,23 @@ public class Launcher : MonoBehaviourPunCallbacks
         {
             if (roomList[i].RemovedFromList)
                 continue;
-            Instantiate(_roomListItemPrefab, _roomListContent).GetComponent<RoomListItem>().SetUp(roomList[i]);
+            Instantiate(roomListItemPrefab, roomListContent).GetComponent<RoomListItem>().SetUp(roomList[i]);
         }
     }
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
-        Instantiate(_playerListItemPrefab, _playerListContent).GetComponent<PlayerListItem>().SetUp(newPlayer);
+        Instantiate(PlayerListItemPrefab, playerListContent).GetComponent<PlayerListItem>().SetUp(newPlayer);
+    }
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+
+    private void Start()
+    {
+        Debug.Log("Connecting to Master");
+        PhotonNetwork.ConnectUsingSettings();
     }
 }

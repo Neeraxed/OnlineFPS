@@ -8,6 +8,7 @@
 [Bb]uild/
 [Bb]uilds/
 [Ll]ogs/
+[Aa]pp/
 [Mm]emoryCaptures/
 [Uu]serSettings/
 
@@ -61,3 +62,5 @@ crashlytics-build.properties
 
 .vsconfig
 /*.vsconfig
+/Assets/Plugins/CodeAssist
+/Assets/Plugins/CodeAssist.meta

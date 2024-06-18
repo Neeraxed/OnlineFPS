@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AppSettings:
     AppIdRealtime: 76a0785d-6c67-4f60-8fcb-015d5e519d11
+    AppIdFusion: 
     AppIdChat: 
     AppIdVoice: 
     AppVersion: 
@@ -21,11 +22,13 @@ MonoBehaviour:
     FixedRegion: 
     Server: 
     Port: 0
+    ProxyServer: 
     Protocol: 0
+    EnableProtocolFallback: 1
     AuthMode: 0
     EnableLobbyStatistics: 0
     NetworkLogging: 1
-  DevRegion: 
+  DevRegion: eu
   PunLogging: 0
   EnableSupportLogger: 0
   RunInBackground: 1
@@ -36,7 +39,11 @@ MonoBehaviour:
   - RPC_GetKill
   - RPC_Shoot
   - RPC_TakeDamage
-  - Damage
+  - DestroySpaceship
+  - Fire
+  - RespawnSpaceship
+  - OnHit
+  - CreateBullets
   DisableAutoOpenWizard: 1
-  ShowSettings: 1
-  DevRegionSetOnce: 0
+  ShowSettings: 0
+  DevRegionSetOnce: 1
